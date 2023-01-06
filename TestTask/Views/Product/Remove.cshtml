@@ -1,0 +1,19 @@
+﻿@model TestTask.Models.ProductViewModel
+@{
+    ViewData["Title"] = "Remove";
+}
+
+<h1>Are you sure to remove this product?</h1>
+<br/>
+<label><b>Name</b> - @Model.Name</label>
+<br/>
+<label><b>Quantity</b> - @Model.Quantity</label>
+<br/>
+<label><b>Price</b> - @Model.Price</label>
+<br/>
+<label><b>Total Price with VAT</b> - @Model.TotalPriceWithVAT</label>
+
+<form asp-action="ConfirmRemove">
+    <input type="hidden" asp-for="Id"/>
+    <button type="submit">Remove</button>
+</form>

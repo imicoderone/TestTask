@@ -1,0 +1,23 @@
+﻿@model TestTask.Models.ProductViewModel
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create Product</h1>
+
+<form asp-controller="Product" asp-action="Create" method="post">
+    <h1>Login</h1>
+    <input type="text" placeholder="Name" asp-for="Name"/>
+    <input type="number" placeholder="Name" asp-for="Quantity"/>
+    <input type="number" placeholder="Name" asp-for="Price"/>
+    
+    <button type="submit">Create</button>
+    
+    @if (ViewData["ValidationMessage"] != null)
+    {
+        <br/>
+        <br/>
+        <label>@ViewData["ValidationMessage"]</label>
+    }
+</form>
+

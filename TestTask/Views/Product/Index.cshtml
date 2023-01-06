@@ -1,0 +1,53 @@
+﻿@using System.Security.Claims
+@using TestTask.Application.Common
+@model IEnumerable<TestTask.Models.ProductViewModel>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<table style="width:100%">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Quantity</th>
+        <th>Price</th>
+        <th>Total Price with VAT</th>
+        @if (HasPermission())
+        {
+            <th>Actions</th>
+        }
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Quantity</td>
+            <td>@item.Price</td>
+            <td>@item.TotalPriceWithVAT</td>
+            @if (HasPermission())
+            {
+                <td>
+                    <a href="Remove/@item.Id">Remove</a>
+                </td>
+            }
+        </tr>
+    }
+    </tbody>
+</table>
+
+@if (HasPermission())
+{
+    <a asp-action="Create">Create</a>
+}
+
+@functions
+{
+    bool HasPermission()
+    {
+        return ViewContext.HttpContext.User.Claims.Any(x => x.Type == ClaimTypes.Role && x.Value == RoleConstants.AdminRoleName);
+    }
+}
+ 
